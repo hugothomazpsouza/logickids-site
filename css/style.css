@@ -1,0 +1,2166 @@
+
+  :root{
+    --azul:#1e3a8a;      /* azul-tecnologia profundo */
+    --azul2:#2563eb;
+    --ciano:#06b6d4;
+    --amarelo:#facc15;
+    --verde:#22c55e;
+    --escuro:#0f172a;
+    --claro:#f8fafc;
+    --cinza:#64748b;
+    --card:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    background:#020617;
+    color:var(--escuro);
+    overflow:hidden;
+  }
+  .deck{position:relative;width:100vw;height:100vh;}
+  .slide{
+    position:absolute;inset:0;
+    display:none;
+    flex-direction:column;
+    padding:6vh 8vw 9vh;
+    opacity:0;
+    transition:opacity .4s ease;
+    overflow:auto;
+  }
+  .slide.active{display:flex;opacity:1;}
+  .slide.light{background:linear-gradient(135deg,#f8fafc 0%,#e0e7ff 100%);color:var(--escuro);}
+  .slide.dark{background:radial-gradient(circle at 20% 20%,#1e3a8a 0%,#0f172a 70%);color:#fff;}
+  .slide.accent{background:linear-gradient(135deg,#2563eb 0%,#06b6d4 100%);color:#fff;}
+
+  .kicker{
+    font-size:1rem;letter-spacing:.15em;text-transform:uppercase;
+    font-weight:700;opacity:.75;margin-bottom:1rem;
+  }
+  h1{font-size:clamp(2rem,4.4vw,4rem);line-height:1.08;font-weight:800;margin-bottom:1.2rem;}
+  h2{font-size:clamp(1.6rem,3.4vw,3rem);line-height:1.12;font-weight:800;margin-bottom:1.6rem;}
+  .lead{font-size:clamp(1.05rem,1.7vw,1.5rem);opacity:.9;max-width:60ch;line-height:1.5;}
+
+  ul.bullets{list-style:none;margin-top:1rem;max-width:65ch;}
+  ul.bullets li{
+    font-size:clamp(1rem,1.55vw,1.45rem);
+    line-height:1.5;padding:.55rem 0 .55rem 2.4rem;position:relative;
+  }
+  ul.bullets li::before{
+    content:"";position:absolute;left:0;top:1.15rem;
+    width:1.1rem;height:1.1rem;border-radius:.3rem;
+    background:linear-gradient(135deg,var(--amarelo),var(--verde));
+  }
+  .dark ul.bullets li::before,.accent ul.bullets li::before{
+    background:linear-gradient(135deg,var(--amarelo),var(--ciano));
+  }
+  strong{color:var(--azul2);}
+  .dark strong,.accent strong{color:#fff;font-weight:800;}
+
+  .badges{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem;}
+  .badge{
+    background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);
+    padding:.5rem 1rem;border-radius:999px;font-size:.95rem;font-weight:600;
+  }
+  .light .badge{background:rgba(37,99,235,.1);border-color:rgba(37,99,235,.35);color:var(--azul);}
+
+  /* pricing cards */
+  .pricing{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:2rem;}
+  .price-card{
+    flex:1 1 220px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);
+    border-radius:1.2rem;padding:1.8rem 1.5rem;text-align:center;
+  }
+  .price-card.featured{background:var(--amarelo);color:var(--escuro);transform:scale(1.05);}
+  .price-card .num{font-size:2.6rem;font-weight:800;}
+  .price-card .unit{opacity:.8;font-size:.95rem;}
+  .price-card .tier{font-weight:700;margin-bottom:.6rem;letter-spacing:.05em;}
+
+  /* journey steps */
+  .journey{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:1.6rem;}
+  .step{
+    flex:1 1 240px;background:rgba(255,255,255,.1);border-radius:1rem;padding:1.4rem;
+    border-left:6px solid var(--amarelo);
+  }
+  .step h3{font-size:1.25rem;margin-bottom:.5rem;}
+  .step p{font-size:1rem;line-height:1.45;opacity:.92;}
+  .step .emoji{font-size:2rem;}
+  .skill-code{font-size:.8rem;font-weight:800;letter-spacing:.04em;opacity:.8;margin-bottom:.35rem;}
+  .evidence-flow{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.4rem;}
+  .evidence-flow .step{flex:1 1 145px;padding:1rem;border-left-width:4px;}
+  .evidence-flow .step h3{font-size:1rem;}
+  .evidence-flow .step p{font-size:.9rem;}
+
+
+  /* product screenshot */
+  .product-shot-wrap{
+    margin-top:1.4rem;display:flex;gap:1.5rem;align-items:center;min-height:0;
+  }
+  .product-shot-copy{flex:0 1 34%;}
+  .product-shot-media{flex:1 1 66%;min-width:0;}
+  .product-shot{
+    display:block;width:100%;height:auto;max-height:48vh;object-fit:contain;
+    border-radius:1rem;border:1px solid rgba(255,255,255,.22);
+    box-shadow:0 18px 45px rgba(2,6,23,.35);background:#fff;
+  }
+  .shot-caption{font-size:.82rem;opacity:.7;margin-top:.55rem;text-align:center;}
+  @media (max-width:900px){
+    .product-shot-wrap{flex-direction:column;align-items:stretch;}
+    .product-shot-copy{flex-basis:auto;}
+    .product-shot{max-height:40vh;}
+  }
+
+  /* two-column */
+  .cols{display:flex;gap:2.5rem;flex-wrap:wrap;align-items:flex-start;}
+  .cols > div{flex:1 1 320px;}
+
+  .notes{
+    margin-top:auto;font-size:.95rem;opacity:.7;font-style:italic;
+    border-top:1px solid rgba(148,163,184,.35);padding-top:1rem;max-width:80ch;
+  }
+  .notes b{font-style:normal;}
+
+  /* chrome */
+  .logo{position:fixed;top:2.2vh;left:2.5vw;font-weight:800;font-size:1.15rem;z-index:20;
+    display:flex;align-items:center;gap:.5rem;color:#fff;mix-blend-mode:difference;}
+  .logo .dot{width:.8rem;height:.8rem;border-radius:50%;background:var(--amarelo);}
+  .progress{position:fixed;bottom:0;left:0;height:6px;background:linear-gradient(90deg,var(--amarelo),var(--verde));z-index:30;transition:width .35s ease;}
+  .counter{position:fixed;bottom:2.2vh;right:2.5vw;font-size:.95rem;color:#fff;mix-blend-mode:difference;z-index:20;font-weight:600;}
+  .nav{position:fixed;bottom:2vh;left:50%;transform:translateX(-50%);display:flex;gap:.6rem;z-index:20;}
+  .nav button{
+    background:rgba(15,23,42,.6);color:#fff;border:1px solid rgba(255,255,255,.3);
+    border-radius:.6rem;padding:.5rem .9rem;font-size:1rem;cursor:pointer;backdrop-filter:blur(6px);
+  }
+  .nav button:hover{background:var(--azul2);}
+  .hint{position:fixed;top:2.2vh;right:2.5vw;font-size:.8rem;color:#fff;mix-blend-mode:difference;opacity:.7;z-index:20;}
+  @media print{
+    .slide{display:flex!important;opacity:1!important;position:relative;height:100vh;page-break-after:always;}
+    .nav,.counter,.progress,.hint{display:none;}
+  }
+
+  /* Slide 3 — cenário curricular */
+  .curriculum-slide .lead{max-width:1000px;margin-bottom:28px}
+  .curriculum-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+  .curriculum-card{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.18);border-top:4px solid var(--amarelo);border-radius:20px;padding:22px 24px 20px;min-height:205px;box-shadow:0 12px 30px rgba(15,23,42,.10)}
+  .curriculum-icon{font-size:30px;margin-bottom:8px}
+  .curriculum-card h3{font-size:23px;margin:0 0 7px;color:#fff}
+  .curriculum-action{font-weight:800;color:#fff;margin-bottom:9px;font-size:17px}
+  .curriculum-card p{font-size:16px;line-height:1.42;margin:0;color:rgba(255,255,255,.92)}
+  .curriculum-flow{margin:24px auto 12px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;font-size:15px;text-transform:uppercase;letter-spacing:.05em;font-weight:800}
+  .curriculum-flow span{background:rgba(15,23,42,.20);border:1px solid rgba(255,255,255,.20);border-radius:999px;padding:10px 15px}
+  .curriculum-flow b{color:var(--amarelo);font-size:22px}
+  .curriculum-bridge{text-align:center;max-width:1000px;margin:10px auto 0;font-size:17px;line-height:1.4}
+  .curriculum-slide .notes{margin-top:22px}
+
+
+/* Slide 4 — Exploradores da Lógica */
+.exploradores-slide .lead{max-width:1100px;margin-bottom:28px}
+.explorer-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px 28px;margin-top:10px}
+.explorer-card{background:linear-gradient(135deg,rgba(71,91,151,.68),rgba(41,51,78,.72));border-left:7px solid #facc15;border-radius:20px;padding:24px 30px 20px;min-height:150px;display:flex;flex-direction:column;justify-content:center}
+.explorer-card h3{font-size:25px;margin:0 0 10px;display:flex;gap:10px;align-items:center}.explorer-card h3 span{font-weight:800;letter-spacing:.04em}
+.explorer-card p{font-size:20px;line-height:1.35;margin:0 0 12px;color:#f3f4f6}.explorer-card .skill-code{font-size:14px;opacity:.78;letter-spacing:.08em;margin-top:auto}
+.logic-experience{margin-top:24px;padding:18px 24px 16px;border:1px solid rgba(255,255,255,.18);border-radius:18px;background:rgba(255,255,255,.055);text-align:center}
+.experience-label{font-size:14px;font-weight:800;letter-spacing:.18em;color:#facc15;margin-bottom:10px}
+.experience-flow{display:flex;align-items:center;justify-content:center;gap:13px;flex-wrap:wrap;font-size:19px;font-weight:700}.experience-flow b{color:#facc15}.experience-flow span{white-space:nowrap}
+.experience-evidence{font-size:15px;color:rgba(255,255,255,.78);margin-top:10px}
+@media(max-width:900px){.explorer-grid{grid-template-columns:1fr}.explorer-card{min-height:auto}.experience-flow{font-size:16px}}
+
+.criadores-slide .lead{max-width:1100px;margin-bottom:24px}
+.creator-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 28px;margin-top:8px}
+.creator-card{padding:20px 26px 18px;border-radius:20px;background:linear-gradient(135deg,rgba(69,96,165,.55),rgba(255,255,255,.08));border-left:7px solid var(--amarelo);min-height:174px;display:flex;flex-direction:column}
+.creator-card h3{margin:0 0 7px;font-size:22px;letter-spacing:.04em;display:flex;gap:10px;align-items:center}
+.creator-card h3 span{font-size:18px;letter-spacing:.08em}
+.creator-card h4{margin:0 0 7px;font-size:21px;color:#fff}
+.creator-card p{margin:0 0 10px;font-size:18px;line-height:1.35;color:rgba(255,255,255,.88)}
+.creator-card .skill-code{margin-top:auto;font-size:13px;opacity:.78}
+.creator-experience{margin-top:20px;padding:15px 22px 14px;border:1px solid rgba(255,255,255,.18);border-radius:18px;background:rgba(255,255,255,.055);text-align:center}
+.creator-experience .experience-label{margin-bottom:9px}
+.creator-experience .experience-flow{font-size:18px}
+.creator-experience .experience-evidence{margin-top:8px}
+@media(max-width:900px){.creator-grid{grid-template-columns:1fr}.creator-card{min-height:auto}.creator-experience .experience-flow{font-size:16px}}
+
+/* Ensino Médio — progression for school audiences */
+.highschool-slide .lead{max-width:1100px}
+.highschool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:24px}
+.highschool-card{display:flex;flex-direction:column;min-height:190px;padding:24px 26px;border-radius:20px;border-left:6px solid #facc15;background:rgba(255,255,255,.10)}
+.highschool-card .series{font-size:14px;font-weight:800;letter-spacing:.10em;color:#facc15;margin-bottom:8px}
+.highschool-card h3{font-size:25px;margin:0 0 8px;color:#fff}
+.highschool-card h4{font-size:17px;margin:0 0 10px;color:rgba(255,255,255,.88)}
+.highschool-card p{font-size:16px;line-height:1.38;margin:0 0 10px;color:rgba(255,255,255,.86)}
+.highschool-card .skill-code{margin-top:auto;font-size:13px;opacity:.72}
+.highschool-experience{margin-top:22px;padding:15px 22px 13px;border:1px solid rgba(255,255,255,.18);border-radius:18px;background:rgba(255,255,255,.055);text-align:center}
+.highschool-experience .experience-flow{font-size:18px}
+.interdisciplinary-note{margin-top:13px;font-size:14px;color:rgba(255,255,255,.78);text-align:center}
+.interdisciplinary-note b{color:#facc15}
+@media(max-width:900px){.highschool-grid{grid-template-columns:1fr}.highschool-card{min-height:auto}.highschool-experience .experience-flow{font-size:16px}}
+
+    .student-experience-bullets li { margin-bottom: 1.15rem; }
+    .student-experience-bullets strong { display:block; margin-bottom:.2rem; letter-spacing:.02em; }
+    .school-callout { margin-top: 1.15rem; padding: .9rem 1.2rem; border: 1px solid rgba(255,255,255,.18); border-left: 5px solid var(--amarelo); border-radius: 16px; background: rgba(255,255,255,.07); }
+    .school-callout > strong { font-size:.78rem; letter-spacing:.16em; color:var(--amarelo); }
+    .school-callout p { margin:.35rem 0 0; font-size:.98rem; line-height:1.4; color:rgba(255,255,255,.88); }
+
+    /* Slide 7 — experiência do aluno: composição compacta para 16:9 */
+    .student-slide{padding-top:5vh;padding-bottom:8vh;overflow:hidden;}
+    .student-slide .kicker{margin-bottom:.55rem;}
+    .student-slide h2{font-size:clamp(2rem,3.15vw,2.85rem);margin-bottom:.75rem;max-width:1200px;}
+    .student-slide .lead{font-size:clamp(1rem,1.45vw,1.28rem);line-height:1.35;max-width:1050px;margin:0 0 1rem;}
+    .student-slide .product-shot-wrap{margin-top:0;gap:1.7rem;align-items:center;}
+    .student-slide .product-shot-copy{flex:0 0 32%;}
+    .student-slide .product-shot-media{flex:1 1 68%;}
+    .student-slide .product-shot{max-height:39vh;border-radius:1.15rem;border:1px solid rgba(255,255,255,.28);box-shadow:0 18px 42px rgba(2,6,23,.38);background:#fff;}
+    .student-slide .shot-caption{margin-top:.35rem;font-size:.76rem;}
+    .student-slide .student-experience-bullets{margin:0;max-width:none;}
+    .student-slide .student-experience-bullets li{font-size:clamp(.95rem,1.22vw,1.16rem);line-height:1.35;padding:.35rem 0 .55rem 2rem;margin:0 0 .55rem;}
+    .student-slide .student-experience-bullets li::before{width:.9rem;height:.9rem;top:.65rem;}
+    .student-slide .student-experience-bullets strong{font-size:1em;margin-bottom:.18rem;}
+    .student-slide .student-experience-bullets span{display:block;opacity:.9;}
+    .student-slide .school-callout{margin-top:.75rem;padding:.7rem 1rem;}
+    .student-slide .school-callout p{font-size:.88rem;line-height:1.28;margin-top:.2rem;}
+    @media(max-width:900px){.student-slide{overflow:auto}.student-slide .product-shot-copy{flex-basis:auto}.student-slide .product-shot{max-height:34vh}}
+
+
+    /* Slide 8 — gamificação com propósito */
+    .gamification-slide{padding-top:5vh;padding-bottom:8vh;overflow:hidden;}
+    .gamification-slide .kicker{margin-bottom:.5rem;}
+    .gamification-slide h2{font-size:clamp(2rem,3.05vw,2.8rem);margin-bottom:.65rem;}
+    .gamification-slide .lead{font-size:clamp(1rem,1.35vw,1.2rem);line-height:1.35;max-width:980px;margin:0 0 1rem;}
+    .gamification-layout{display:grid;grid-template-columns:minmax(280px,.78fr) minmax(520px,1.45fr);gap:2rem;align-items:center;min-height:0;}
+    .gamification-copy{display:flex;flex-direction:column;gap:.75rem;}
+    .gamification-point{display:grid;grid-template-columns:42px 1fr;gap:.7rem;align-items:start;padding:.72rem .8rem;border-radius:14px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);}
+    .gamification-icon{font-size:1.35rem;line-height:1.2;padding-top:.05rem;}
+    .gamification-point h3{font-size:clamp(.92rem,1.12vw,1.08rem);letter-spacing:.04em;margin:0 0 .2rem;color:#fff;}
+    .gamification-point p{font-size:clamp(.86rem,1.02vw,.98rem);line-height:1.32;margin:0;color:rgba(255,255,255,.86);}
+    .gamification-point p strong{color:#fff;}
+    .gamification-media{min-width:0;display:flex;flex-direction:column;align-items:center;}
+    .gamification-shot{width:100%;height:auto;max-height:46vh;object-fit:cover;object-position:center;border-radius:1.15rem;border:1px solid rgba(255,255,255,.28);box-shadow:0 18px 42px rgba(2,6,23,.38);background:#fff;display:block;}
+    .gamification-slide .shot-caption{font-size:.74rem;margin-top:.35rem;opacity:.68;text-align:center;}
+    .gamification-callout{margin-top:.8rem;padding:.7rem 1rem;border:1px solid rgba(255,255,255,.18);border-left:5px solid var(--amarelo);border-radius:14px;background:rgba(255,255,255,.06);font-size:clamp(.78rem,.95vw,.9rem);line-height:1.32;color:rgba(255,255,255,.86);}
+    .gamification-callout>strong{display:block;color:var(--amarelo);font-size:.76rem;letter-spacing:.12em;margin-bottom:.2rem;}
+    .gamification-callout b{color:#fff;}
+    @media(max-width:900px){.gamification-slide{overflow:auto}.gamification-layout{grid-template-columns:1fr}.gamification-shot{max-height:36vh}.gamification-copy{gap:.55rem}}
+
+    /* Slide 9 — metodologia: fundamentação + trilha */
+    .method-slide{padding-top:5vh;padding-bottom:8vh;overflow:hidden;}
+    .method-slide .kicker{margin-bottom:.45rem;}
+    .method-slide h2{font-size:clamp(2rem,3vw,2.75rem);margin-bottom:.55rem;}
+    .method-slide .lead{font-size:clamp(1rem,1.3vw,1.18rem);line-height:1.35;max-width:1050px;margin:0 0 .9rem;}
+    .method-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;min-height:0;}
+    .method-card{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);border-radius:18px;padding:.85rem;box-shadow:0 16px 38px rgba(2,6,23,.18);min-width:0;}
+    .method-card-head{display:flex;align-items:flex-start;gap:.7rem;margin:0 0 .65rem;}
+    .method-num{flex:0 0 34px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--amarelo);color:var(--escuro);font-weight:900;}
+    .method-card h3{font-size:1.05rem;margin:0 0 .12rem;color:#fff;letter-spacing:.04em;}
+    .method-card p{font-size:.86rem;line-height:1.3;margin:0;color:rgba(255,255,255,.86);}
+    .method-shot{display:block;width:100%;height:34vh;object-fit:cover;object-position:top center;border-radius:14px;border:1px solid rgba(255,255,255,.24);box-shadow:0 12px 30px rgba(2,6,23,.30);background:#fff;}
+    .method-caption{text-align:center;font-size:.72rem;opacity:.7;margin-top:.38rem;}
+    .method-callout{margin-top:.75rem;padding:.65rem 1rem;border-radius:14px;border:1px solid rgba(255,255,255,.20);border-left:5px solid var(--amarelo);background:rgba(15,23,42,.18);font-size:.86rem;line-height:1.3;color:rgba(255,255,255,.9);}
+    .method-callout b{color:#fff;}
+    @media(max-width:900px){.method-slide{overflow:auto}.method-grid{grid-template-columns:1fr}.method-shot{height:32vh}}
+
+/* Slide 10 — transição Blocos → Python */
+.transition-slide{padding-top:52px!important;}
+.transition-slide .kicker{margin-bottom:8px;}
+.transition-slide h2{font-size:44px;line-height:1.05;margin:0 0 8px;}
+.transition-slide>.lead{font-size:20px;line-height:1.35;margin:0 0 16px;max-width:1120px;}
+.transition-grid{display:grid;grid-template-columns:minmax(0,1fr) 42px minmax(0,1fr);gap:14px;align-items:stretch;}
+.transition-card{min-width:0;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:14px 14px 13px;display:flex;flex-direction:column;}
+.transition-card-head{display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:start;margin-bottom:10px;min-height:84px;}
+.transition-num{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--amarelo);color:#172033;font-weight:900;font-size:17px;box-shadow:0 4px 14px rgba(250,204,21,.22);}
+.transition-card h3{font-size:22px;letter-spacing:.08em;margin:1px 0 4px;color:#fff;}
+.transition-card-head p{font-size:15px;line-height:1.32;margin:0;color:rgba(255,255,255,.82);}
+.transition-shot-frame{height:310px;background:#fff;border:1px solid rgba(255,255,255,.26);border-radius:16px;overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.28);}
+.transition-shot{width:100%;height:100%;display:block;object-fit:cover;object-position:50% 8%;}
+.transition-arrow{align-self:center;justify-self:center;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--amarelo),#65d7b3);color:#10203e;font-size:27px;font-weight:900;box-shadow:0 8px 22px rgba(0,0,0,.2);}
+.transition-school-note{margin-top:14px;border:1px solid rgba(255,255,255,.16);border-left:5px solid var(--amarelo);border-radius:14px;background:rgba(255,255,255,.055);padding:10px 16px 11px;}
+.transition-school-note span{display:block;color:var(--amarelo);font-size:12px;font-weight:900;letter-spacing:.18em;margin-bottom:3px;}
+.transition-school-note p{margin:0;font-size:15px;line-height:1.3;color:rgba(255,255,255,.82);}
+@media(max-width:900px){.transition-grid{grid-template-columns:1fr}.transition-arrow{transform:rotate(90deg)}.transition-shot-frame{height:220px}.transition-slide h2{font-size:34px}.transition-card-head{min-height:auto}}
+
+/* Slide 12 — professor dashboard */
+.teacher-slide{padding-top:5vh;padding-bottom:7vh;overflow:hidden;}
+.teacher-slide .kicker{margin-bottom:.5rem;}
+.teacher-slide h2{font-size:clamp(2rem,3.05vw,2.75rem);line-height:1.08;margin:0 0 .65rem;max-width:1180px;}
+.teacher-slide>.lead{font-size:clamp(1rem,1.35vw,1.2rem);line-height:1.35;margin:0 0 1rem;max-width:1080px;}
+.teacher-layout{display:grid;grid-template-columns:34% 66%;gap:1.55rem;align-items:center;margin-top:.4rem;}
+.teacher-points{display:flex;flex-direction:column;gap:.72rem;}
+.teacher-point{padding:.72rem .85rem .72rem 1rem;border-left:4px solid var(--amarelo);border-radius:0 12px 12px 0;background:rgba(255,255,255,.055);}
+.teacher-point h3{margin:0 0 .18rem;font-size:1rem;color:#fff;letter-spacing:.02em;}
+.teacher-point p{margin:0;font-size:.88rem;line-height:1.32;color:rgba(255,255,255,.82);}
+.teacher-shot-frame{overflow:hidden;border-radius:16px;border:1px solid rgba(255,255,255,.26);box-shadow:0 14px 34px rgba(2,6,23,.34);background:#fff;}
+.teacher-shot{display:block;width:100%;height:43vh;object-fit:cover;object-position:top center;background:#fff;}
+.teacher-slide .shot-caption{font-size:.74rem;margin-top:.35rem;opacity:.68;text-align:center;}
+.teacher-callout{margin-top:.85rem;padding:.72rem 1rem;border:1px solid rgba(255,255,255,.16);border-left:5px solid var(--amarelo);border-radius:14px;background:rgba(255,255,255,.055);}
+.teacher-callout strong{display:block;color:var(--amarelo);font-size:.74rem;letter-spacing:.16em;margin-bottom:.2rem;}
+.teacher-callout p{margin:0;font-size:.88rem;line-height:1.3;color:rgba(255,255,255,.84);}
+@media(max-width:900px){.teacher-slide{overflow:auto}.teacher-layout{grid-template-columns:1fr}.teacher-shot{height:34vh}.teacher-points{gap:.5rem}}
+
+/* Slide 13 — visão institucional */
+.admin-slide{padding-top:4.7vh;padding-bottom:7.5vh;overflow:hidden;}
+.admin-slide .kicker{margin-bottom:.35rem}.admin-slide h2{font-size:clamp(2rem,3vw,2.7rem);line-height:1.07;margin:0 0 .45rem}.admin-slide>.lead{font-size:clamp(.98rem,1.25vw,1.14rem);line-height:1.32;margin:0 0 .8rem;max-width:1080px}
+.admin-layout{display:grid;grid-template-columns:34% 66%;gap:1.15rem;align-items:center}.admin-points{display:grid;gap:.58rem}.admin-point{padding:.65rem .78rem;border-left:4px solid var(--amarelo);background:rgba(255,255,255,.09);border-radius:0 14px 14px 0}.admin-point h3{font-size:.93rem;margin:0 0 .15rem}.admin-point p{font-size:.83rem;line-height:1.27;margin:0;opacity:.94}.admin-shot-frame{background:#fff;border:1px solid rgba(255,255,255,.28);border-radius:18px;padding:7px;box-shadow:0 16px 38px rgba(2,8,23,.27);overflow:hidden}.admin-shot{display:block;width:100%;height:45vh;object-fit:cover;object-position:center top;border-radius:12px}.admin-caption{font-size:.72rem;text-align:center;opacity:.7;margin-top:.3rem}.admin-callout{margin-top:.7rem;padding:.65rem .9rem;border:1px solid rgba(255,255,255,.2);border-left:4px solid var(--amarelo);border-radius:13px;background:rgba(255,255,255,.07)}.admin-callout strong{font-size:.78rem;letter-spacing:.12em;color:var(--amarelo)}.admin-callout p{font-size:.86rem;line-height:1.28;margin:.18rem 0 0}.admin-flow{display:flex;align-items:center;gap:.4rem;margin-top:.45rem;font-size:.76rem;font-weight:800;letter-spacing:.03em;opacity:.9}.admin-flow span{padding:.22rem .45rem;border-radius:999px;background:rgba(255,255,255,.09)}.admin-flow b{color:var(--amarelo)}
+@media(max-width:900px){.admin-slide{overflow:auto}.admin-layout{grid-template-columns:1fr}.admin-shot{height:32vh}}
+
+/* Correção página 8 — preservar a captura completa */
+.gamification-slide .product-shot,
+.gamification-slide img.product-shot {
+  width: 100%;
+  height: auto !important;
+  max-height: 42vh;
+  object-fit: contain !important;
+  object-position: center center !important;
+  border-radius: 1.15rem;
+  border: 1px solid rgba(255,255,255,.28);
+  box-shadow: 0 18px 42px rgba(2,6,23,.38);
+  background: #fff;
+  display: block;
+}
+.gamification-slide .shot-wrap,
+.gamification-slide .product-shot-wrap {
+  overflow: visible !important;
+  border-radius: 1.15rem;
+}
+
+
+/* Página 8 — imagem completa e acabamento consistente */
+.gamification-slide .gamification-media{
+  min-width:0; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+}
+.gamification-slide .gamification-shot{
+  width:100%; height:auto !important; max-height:47vh !important;
+  object-fit:contain !important; object-position:center center !important;
+  border-radius:1.15rem !important;
+  border:1px solid rgba(255,255,255,.30) !important;
+  box-shadow:0 18px 42px rgba(2,6,23,.40) !important;
+  background:#fff; display:block;
+}
+.gamification-slide .media-caption{
+  margin-top:.55rem; text-align:center; max-width:92%;
+}
+
+/* Página 8 v2 — enquadramento completo para apresentação escolar */
+.gamification-slide .gamification-media{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:.15rem;
+}
+.gamification-slide .gamification-shot{
+  display:block;
+  width:100%;
+  height:auto !important;
+  max-height:45vh !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  border-radius:1.25rem !important;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.32) !important;
+  box-shadow:0 18px 42px rgba(2,6,23,.42) !important;
+  background:#fff;
+}
+.gamification-slide .media-caption{
+  margin-top:.55rem;
+  text-align:center;
+  max-width:94%;
+  opacity:.82;
+}
+
+/* Página 8 — acabamento harmonizado com as imagens da página 9 */
+.gamification-slide .gamification-media{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.gamification-slide .gamification-shot{
+  display:block;
+  width:100%;
+  height:auto !important;
+  max-height:45vh !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  border-radius:18px !important;
+  overflow:hidden !important;
+  border:1px solid rgba(255,255,255,.18) !important;
+  box-shadow:0 16px 34px rgba(2,6,23,.34) !important;
+  background:#fff !important;
+}
+.gamification-slide .media-caption{
+  margin-top:.55rem;
+  text-align:center;
+  opacity:.78;
+}
+
+/* Página 11 — painel do professor, acabamento alinhado à página 10 */
+.slide:nth-of-type(11) .teacher-shot{
+  display:block;
+  width:100%;
+  height:auto !important;
+  max-height:43vh !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  border-radius:18px !important;
+  overflow:hidden !important;
+  border:1px solid rgba(255,255,255,.18) !important;
+  box-shadow:0 16px 34px rgba(2,6,23,.34) !important;
+  background:#fff !important;
+}
+
+/* --- Extracted from index.html --- */
+
+/* Slide 9 refinement — 2026-10-02 */
+.method-slide{padding-top:4.2vh;padding-bottom:7.5vh;overflow:hidden;}
+.method-slide .kicker{margin-bottom:.28rem;}
+.method-slide h2{font-size:clamp(1.9rem,2.8vw,2.55rem);margin-bottom:.3rem;}
+.method-slide .lead{font-size:clamp(.95rem,1.15vw,1.08rem);line-height:1.3;max-width:1120px;margin:0 0 .45rem;}
+.method-flow{display:flex;align-items:center;gap:.55rem;margin:0 0 .55rem;font-size:.72rem;font-weight:900;letter-spacing:.08em;color:#fff;}
+.method-flow span{padding:.28rem .62rem;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);}
+.method-flow b{color:var(--amarelo);font-size:1rem;}
+.method-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.15rem;min-height:0;}
+.method-card{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:.68rem;box-shadow:0 14px 34px rgba(2,6,23,.18);min-width:0;}
+.method-card-head{display:flex;align-items:flex-start;gap:.62rem;margin:0 0 .48rem;min-height:58px;}
+.method-num{flex:0 0 30px;width:30px;height:30px;font-size:.88rem;}
+.method-card h3{font-size:.98rem;margin:0 0 .08rem;letter-spacing:.045em;}
+.method-card p{font-size:.78rem;line-height:1.25;margin:0;color:rgba(255,255,255,.86);}
+.method-shot-frame{overflow:hidden;border-radius:15px;border:1px solid rgba(255,255,255,.28);box-shadow:0 12px 30px rgba(2,6,23,.30);background:#fff;}
+.method-shot{display:block;width:100%;height:31vh;object-fit:cover;object-position:top center;border:0;border-radius:0;box-shadow:none;background:#fff;}
+.method-card:first-child .method-shot{object-position:center 10%;}
+.method-card:nth-child(2) .method-shot{object-position:center 5%;}
+.method-caption{text-align:left;font-size:.67rem;line-height:1.2;opacity:.76;margin:.34rem .08rem 0;}
+.method-callout{margin-top:.55rem;padding:.52rem .8rem;border-radius:13px;border:1px solid rgba(255,255,255,.18);border-left:5px solid var(--amarelo);background:rgba(15,23,42,.20);font-size:.75rem;line-height:1.25;color:rgba(255,255,255,.88);}
+.method-callout span{display:inline-block;color:var(--amarelo);font-size:.68rem;font-weight:900;letter-spacing:.11em;margin-right:.45rem;}
+.method-callout b{color:#fff;}
+@media(max-width:900px){.method-slide{overflow:auto}.method-grid{grid-template-columns:1fr}.method-shot{height:30vh}.method-flow{flex-wrap:wrap}}
+
+/* --- Extracted from index.html --- */
+
+/* Ajuste final página 11 — imagem + borda com o mesmo raio */
+.slide:nth-of-type(11) .teacher-shot{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-height:43vh !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  border-radius:20px !important;
+  border:2px solid rgba(255,255,255,.22) !important;
+  box-shadow:0 16px 34px rgba(2,6,23,.34) !important;
+  background:#fff !important;
+  box-sizing:border-box !important;
+  clip-path:inset(0 round 20px) !important;
+}
+.slide:nth-of-type(11) .teacher-shot-wrap,
+.slide:nth-of-type(11) .image-frame{
+  border-radius:20px !important;
+  overflow:hidden !important;
+}
+
+/* --- Extracted from index.html --- */
+
+/* Página 13 — painel da direção */
+.slide.admin-slide .admin-shot-frame{
+  border-radius:20px !important;
+  overflow:hidden !important;
+  padding:7px !important;
+  border:2px solid rgba(255,255,255,.24) !important;
+  box-shadow:0 16px 38px rgba(2,8,23,.30) !important;
+  background:#fff !important;
+  box-sizing:border-box !important;
+}
+.slide.admin-slide .admin-shot{
+  display:block !important;
+  width:100% !important;
+  height:43vh !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  border-radius:14px !important;
+  background:#f7fafc !important;
+  clip-path:inset(0 round 14px) !important;
+}
+
+/* --- Extracted from index.html --- */
+
+/* Página 13 — imagem alinhada, sem fundo branco externo */
+.slide.admin-slide .admin-shot-frame{
+  padding:0 !important;
+  background:transparent !important;
+  border:2px solid rgba(255,255,255,.24) !important;
+  border-radius:20px !important;
+  overflow:hidden !important;
+  box-shadow:0 16px 38px rgba(2,8,23,.30) !important;
+  line-height:0 !important;
+}
+.slide.admin-slide .admin-shot{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-height:43vh !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:18px !important;
+  background:transparent !important;
+  clip-path:inset(0 round 18px) !important;
+}
+.slide.admin-slide .admin-layout{
+  align-items:center !important;
+}
+
+/* --- Extracted from index.html --- */
+
+/* Página 13 — acabamento final da captura */
+.slide.admin-slide .admin-shot-frame{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  padding:0 !important;
+  margin:0 !important;
+  background:none !important;
+  background-color:transparent !important;
+  border:0 !important;
+  border-radius:20px !important;
+  overflow:hidden !important;
+  box-shadow:0 16px 38px rgba(2,8,23,.32) !important;
+  line-height:0 !important;
+}
+
+.slide.admin-slide .admin-shot{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-height:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  background:none !important;
+  background-color:transparent !important;
+  border:2px solid rgba(255,255,255,.30) !important;
+  border-radius:20px !important;
+  box-sizing:border-box !important;
+  clip-path:inset(0 round 20px) !important;
+}
+
+.slide.admin-slide .admin-layout{
+  align-items:center !important;
+}
+
+.slide.admin-slide .admin-visual{
+  background:transparent !important;
+  padding:0 !important;
+}
+
+/* --- Extracted from index.html --- */
+
+/* Página 11 — mesmo acabamento final aplicado à página 13 */
+.slide:nth-of-type(11) .teacher-shot-wrap,
+.slide:nth-of-type(11) .image-frame{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  padding:0 !important;
+  margin:0 !important;
+  background:none !important;
+  background-color:transparent !important;
+  border:0 !important;
+  border-radius:20px !important;
+  overflow:hidden !important;
+  box-shadow:0 16px 38px rgba(2,8,23,.32) !important;
+  line-height:0 !important;
+}
+
+.slide:nth-of-type(11) .teacher-shot{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-height:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  background:none !important;
+  background-color:transparent !important;
+  border:2px solid rgba(255,255,255,.30) !important;
+  border-radius:20px !important;
+  box-sizing:border-box !important;
+  clip-path:inset(0 round 20px) !important;
+}
+
+/* --- Extracted from index.html --- */
+
+/* Página 8 — mesmo acabamento final das páginas 11 e 13 */
+.slide:nth-of-type(8) .student-profile-shot-wrap,
+.slide:nth-of-type(8) .image-frame,
+.slide:nth-of-type(8) .profile-shot-frame{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  padding:0 !important;
+  margin:0 !important;
+  background:none !important;
+  background-color:transparent !important;
+  border:0 !important;
+  border-radius:20px !important;
+  overflow:hidden !important;
+  box-shadow:0 16px 38px rgba(2,8,23,.32) !important;
+  line-height:0 !important;
+}
+
+.slide:nth-of-type(8) .student-profile-shot,
+.slide:nth-of-type(8) .profile-shot,
+.slide:nth-of-type(8) img{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-height:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  background:none !important;
+  background-color:transparent !important;
+  border:2px solid rgba(255,255,255,.30) !important;
+  border-radius:20px !important;
+  box-sizing:border-box !important;
+  clip-path:inset(0 round 20px) !important;
+}
+
+/* --- Extracted from index.html --- */
+
+/* Página 7 — mesmo acabamento final aprovado nas páginas 8, 11 e 13 */
+.slide:nth-of-type(7) .student-shot-wrap,
+.slide:nth-of-type(7) .image-frame,
+.slide:nth-of-type(7) .student-shot-frame{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  padding:0 !important;
+  margin:0 !important;
+  background:none !important;
+  background-color:transparent !important;
+  border:0 !important;
+  border-radius:20px !important;
+  overflow:hidden !important;
+  box-shadow:0 16px 38px rgba(2,8,23,.32) !important;
+  line-height:0 !important;
+}
+
+.slide:nth-of-type(7) .student-shot,
+.slide:nth-of-type(7) img{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-height:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  background:none !important;
+  background-color:transparent !important;
+  border:2px solid rgba(255,255,255,.30) !important;
+  border-radius:20px !important;
+  box-sizing:border-box !important;
+  clip-path:inset(0 round 20px) !important;
+}
+
+/* --- Extracted from index.html --- */
+
+/* Página 1 — capa institucional para direção, coordenação e professores */
+.cover-edu .lead{
+  max-width:980px;
+  line-height:1.45;
+}
+.cover-edu .lead strong{
+  color:#fff;
+  font-weight:700;
+}
+.cover-journey{
+  display:flex;
+  align-items:stretch;
+  gap:14px;
+  margin-top:34px;
+  max-width:1040px;
+}
+.cover-step{
+  min-width:0;
+  flex:1;
+  padding:17px 20px 15px;
+  border:1px solid rgba(255,255,255,.24);
+  border-radius:18px;
+  background:rgba(255,255,255,.075);
+  box-shadow:0 10px 28px rgba(2,8,23,.12);
+}
+.cover-step strong{
+  display:block;
+  color:#fff;
+  font-size:20px;
+  line-height:1.15;
+  margin-bottom:7px;
+}
+.cover-step span{
+  display:block;
+  color:rgba(255,255,255,.76);
+  font-size:15px;
+  line-height:1.25;
+}
+.cover-arrow{
+  align-self:center;
+  color:#facc15;
+  font-size:28px;
+  font-weight:800;
+}
+.cover-support{
+  margin-top:26px;
+  max-width:940px;
+  color:rgba(255,255,255,.82);
+  font-size:18px;
+  line-height:1.45;
+}
+
+/* --- Extracted from index.html --- */
+
+/* Mascote institucional — capa e encerramento */
+.cover-edu { position: relative; overflow: hidden; }
+.lk-mascot { position:absolute; pointer-events:none; z-index:1; }
+.lk-mascot img {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  border-radius:28px;
+}
+.lk-mascot-cover{
+  right:4.4%;
+  top:16%;
+  width:32%;
+  height:55%;
+  opacity:.98;
+  filter:drop-shadow(0 18px 34px rgba(0,0,0,.22));
+}
+.cover-edu > :not(.lk-mascot){ position:relative; z-index:2; }
+.cover-edu h1,
+.cover-edu .lead,
+.cover-edu .cover-journey,
+.cover-edu .cover-support { max-width:68%; }
+.cover-edu .cover-journey { max-width:66%; }
+.lk-mascot-end{
+  right:6%;
+  top:15%;
+  width:31%;
+  height:52%;
+  opacity:.97;
+  filter:drop-shadow(0 16px 30px rgba(0,0,0,.20));
+}
+section.slide:last-of-type { position:relative; overflow:hidden; }
+section.slide:last-of-type > :not(.lk-mascot){ position:relative; z-index:2; }
+section.slide:last-of-type h1,
+section.slide:last-of-type .lead { max-width:66%; }
+@media (max-width: 1050px){
+  .lk-mascot-cover,.lk-mascot-end{ opacity:.30; right:-4%; width:38%; }
+  .cover-edu h1,.cover-edu .lead,.cover-edu .cover-journey,.cover-edu .cover-support,
+  section.slide:last-of-type h1,section.slide:last-of-type .lead{ max-width:82%; }
+}
+
+/* CAPA REORGANIZADA — versão institucional, mais limpa */
+.cover-refined{
+  position:relative;
+  height:100vh;
+  min-height:100vh;
+  box-sizing:border-box;
+  padding:28px 56px 34px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 82% 42%, rgba(37,99,235,.20), transparent 32%),
+    linear-gradient(118deg,#1e3a8a 0%,#142653 48%,#0f172a 100%) !important;
+}
+.cover-refined .brand{
+  position:absolute; top:22px; left:34px;
+  font-size:19px; font-weight:800; color:#facc15;
+}
+.cover-refined .navhint{
+  position:absolute; top:24px; right:36px;
+  font-size:13px; color:rgba(255,255,255,.65);
+}
+.cover-grid{
+  width:min(1360px, calc(100vw - 112px));
+  height:100%;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(0,1.5fr) minmax(330px,.72fr);
+  align-items:center;
+  gap:58px;
+}
+.cover-copy{max-width:880px;padding-top:14px}
+.cover-refined .eyebrow{
+  margin-bottom:18px;
+  font-size:17px; font-weight:800; letter-spacing:.18em;
+  color:#c7d2fe;
+}
+.cover-refined h1{
+  margin:0;
+  max-width:850px;
+  font-size:clamp(48px,5.4vw,78px);
+  line-height:.98;
+  letter-spacing:-.045em;
+  color:#fff;
+}
+.cover-subtitle{
+  margin:28px 0 5px;
+  font-size:clamp(20px,2vw,29px);
+  line-height:1.25;
+  font-weight:700;
+  color:#fff;
+}
+.cover-scope{
+  margin:0;
+  font-size:clamp(17px,1.55vw,23px);
+  color:#dbeafe;
+}
+.cover-path{
+  margin-top:32px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.cover-path span{
+  padding:9px 18px;
+  border:1px solid rgba(255,255,255,.26);
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  font-size:16px;
+  font-weight:750;
+}
+.cover-path b{color:#facc15;font-size:22px}
+.cover-note{
+  margin:25px 0 0;
+  padding-top:17px;
+  max-width:760px;
+  border-top:1px solid rgba(255,255,255,.18);
+  color:rgba(255,255,255,.78);
+  font-size:16px;
+  line-height:1.45;
+}
+.cover-visual{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+}
+.cover-refined .lk-mascot-cover{
+  width:min(390px,29vw) !important;
+  max-width:390px !important;
+  margin:0 !important;
+  transform:none !important;
+}
+.cover-refined .lk-mascot-cover img{
+  display:block;
+  width:100% !important;
+  height:auto !important;
+  max-height:560px;
+  object-fit:contain;
+  filter:drop-shadow(0 22px 28px rgba(0,0,0,.28));
+}
+@media(max-width:900px){
+  .cover-refined{padding:68px 34px 30px}
+  .cover-grid{width:100%;grid-template-columns:1fr;gap:20px}
+  .cover-visual{position:absolute;right:25px;bottom:42px;opacity:.26}
+  .cover-refined .lk-mascot-cover{width:290px !important}
+  .cover-copy{position:relative;z-index:2}
+}
+
+
+
+/* HEADER CAPA — fonte única, sem sobreposição */
+.cover-refined > .brand{
+  display:block !important;
+  position:absolute !important;
+  top:22px !important;
+  left:34px !important;
+  z-index:30 !important;
+  margin:0 !important;
+  transform:none !important;
+  opacity:1 !important;
+  color:#facc15 !important;
+  font-size:19px !important;
+  line-height:1 !important;
+  font-weight:800 !important;
+  letter-spacing:0 !important;
+  text-shadow:none !important;
+}
+.cover-refined > .navhint{
+  display:block !important;
+  position:absolute !important;
+  top:22px !important;
+  right:36px !important;
+  z-index:30 !important;
+  margin:0 !important;
+  transform:none !important;
+  opacity:1 !important;
+  color:rgba(255,255,255,.68) !important;
+  font-size:13px !important;
+  line-height:1.2 !important;
+  font-weight:400 !important;
+  letter-spacing:0 !important;
+  text-shadow:none !important;
+}
+.cover-refined::before,
+.cover-refined::after{
+  content:none !important;
+  display:none !important;
+}
+
+
+/* Página 1: cabeçalho EXATAMENTE pelo mesmo mecanismo da página 2.
+   Não criar logo/hint próprios dentro da capa. */
+.cover-refined > .brand,
+.cover-refined > .navhint,
+.cover-refined::before,
+.cover-refined::after{
+  display:none !important;
+  content:none !important;
+}
+
+
+/* Slide final — reorganizado com a mesma disciplina visual da capa */
+.closing-refined{
+  padding:74px 72px 58px !important;
+  background:linear-gradient(112deg,#203f87 0%,#142b5b 48%,#071121 100%) !important;
+  display:grid !important;
+  grid-template-columns:minmax(0,1.42fr) minmax(300px,.58fr);
+  gap:54px;
+  align-items:center;
+  overflow:hidden;
+}
+.closing-refined .closing-copy{
+  max-width:860px;
+  align-self:center;
+}
+.closing-refined .eyebrow{
+  margin:0 0 22px;
+  font-size:17px;
+  letter-spacing:.19em;
+  font-weight:800;
+  color:#dbe7ff;
+}
+.closing-refined h1{
+  margin:0;
+  max-width:820px;
+  font-size:clamp(48px,5.1vw,74px);
+  line-height:1.02;
+  letter-spacing:-.035em;
+}
+.closing-refined .closing-subtitle{
+  margin:26px 0 0;
+  font-size:25px;
+  color:#f3f7ff;
+}
+.closing-path{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  margin-top:38px;
+  max-width:820px;
+}
+.closing-path div{
+  min-width:0;
+  flex:1;
+  padding:16px 18px;
+  border:1px solid rgba(255,255,255,.24);
+  border-radius:16px;
+  background:rgba(255,255,255,.075);
+}
+.closing-path strong,.closing-path span{display:block}
+.closing-path strong{font-size:18px}
+.closing-path span{margin-top:4px;font-size:14px;color:#cbd8ef}
+.closing-path b{font-size:28px;color:#facc15}
+.closing-message{
+  margin-top:30px;
+  padding-top:19px;
+  border-top:1px solid rgba(255,255,255,.18);
+  font-size:17px;
+  color:#cbd8ef;
+}
+.closing-visual{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+}
+.closing-visual > div{
+  width:min(100%,390px) !important;
+  max-width:390px !important;
+  margin:0 !important;
+  position:static !important;
+  transform:none !important;
+}
+.closing-visual img{
+  display:block;
+  width:100% !important;
+  max-width:390px !important;
+  height:auto !important;
+  max-height:480px !important;
+  object-fit:contain !important;
+  margin:auto !important;
+}
+@media(max-width:900px){
+  .closing-refined{
+    grid-template-columns:1fr;
+    gap:24px;
+    padding:70px 34px 34px !important;
+  }
+  .closing-refined h1{font-size:46px}
+  .closing-refined .closing-visual{display:none}
+  .closing-path{gap:8px}
+}
+
+
+/* Slide 15: fundo contínuo até a borda inferior, incluindo a navegação */
+body:has(.slide.active.closing-refined){
+  background:linear-gradient(112deg,#203f87 0%,#142b5b 48%,#071121 100%) !important;
+}
+body:has(.slide.active.closing-refined) .deck,
+body:has(.slide.active.closing-refined) .slides,
+body:has(.slide.active.closing-refined) .stage,
+body:has(.slide.active.closing-refined) .presentation{
+  background:transparent !important;
+}
+body:has(.slide.active.closing-refined) .controls,
+body:has(.slide.active.closing-refined) .nav,
+body:has(.slide.active.closing-refined) .navigation{
+  background:transparent !important;
+}
+.closing-refined{
+  min-height:100vh !important;
+  height:100vh !important;
+  box-sizing:border-box !important;
+  padding-bottom:110px !important;
+}
+
+
+/* Slide 8 — separa texto e imagem sem remover conteúdo */
+.slide8-layout-fix{
+  padding:72px 72px 96px !important;
+  overflow:hidden !important;
+}
+.slide8-layout-fix > .grid,
+.slide8-layout-fix > .content-grid,
+.slide8-layout-fix > .two-col{
+  display:grid !important;
+  grid-template-columns:minmax(360px,.72fr) minmax(0,1.28fr) !important;
+  column-gap:38px !important;
+  align-items:start !important;
+}
+
+/* Coluna textual: largura protegida */
+.slide8-layout-fix .left,
+.slide8-layout-fix .copy,
+.slide8-layout-fix .text-col{
+  min-width:0 !important;
+  max-width:520px !important;
+  position:relative !important;
+  z-index:2 !important;
+}
+
+/* Imagem: deslocada para a direita e limitada para não invadir o texto */
+.slide8-layout-fix .visual,
+.slide8-layout-fix .image-wrap,
+.slide8-layout-fix .screenshot-wrap,
+.slide8-layout-fix .media{
+  position:absolute !important;
+  left:40% !important;
+  right:7.5% !important;
+  top:23.5% !important;
+  bottom:7.5% !important;
+  width:auto !important;
+  height:auto !important;
+  margin:0 !important;
+  z-index:1 !important;
+}
+.slide8-layout-fix .visual img,
+.slide8-layout-fix .image-wrap img,
+.slide8-layout-fix .screenshot-wrap img,
+.slide8-layout-fix .media img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:contain !important;
+  object-position:center top !important;
+  border-radius:20px !important;
+}
+
+/* Protege os cards e a faixa inferior à esquerda */
+.slide8-layout-fix .card,
+.slide8-layout-fix .callout,
+.slide8-layout-fix .note,
+.slide8-layout-fix .highlight{
+  position:relative !important;
+  z-index:3 !important;
+}
+
+
+/* Slide 8 — ajuste final: captura menor e totalmente contida na área visual */
+.slide8-layout-fix .gamification-layout{
+  grid-template-columns:minmax(300px,.82fr) minmax(470px,1.18fr) !important;
+  gap:2.2rem !important;
+  align-items:center !important;
+}
+.slide8-layout-fix .gamification-media{
+  position:static !important;
+  width:100% !important;
+  height:auto !important;
+  margin:0 !important;
+  padding:0 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  z-index:auto !important;
+}
+.slide8-layout-fix .gamification-shot{
+  width:88% !important;
+  height:auto !important;
+  max-height:36vh !important;
+  object-fit:contain !important;
+  object-position:center top !important;
+  border-radius:18px !important;
+  border:1px solid rgba(255,255,255,.22) !important;
+  box-shadow:0 14px 30px rgba(2,6,23,.32) !important;
+  background:#fff !important;
+  display:block !important;
+}
+.slide8-layout-fix .shot-caption{
+  width:88% !important;
+  margin:.45rem auto 0 !important;
+  text-align:center !important;
+}
+.slide8-layout-fix .gamification-callout{
+  position:relative !important;
+  z-index:2 !important;
+  margin-top:.75rem !important;
+  max-width:100% !important;
+}
+
+
+/* Slide 8 — imagem compacta para liberar completamente a faixa inferior */
+.slide8-layout-fix .gamification-layout{
+  grid-template-columns:minmax(340px,.88fr) minmax(430px,1.12fr) !important;
+  gap:2.5rem !important;
+}
+.slide8-layout-fix .gamification-media{
+  align-self:start !important;
+  margin-top:.25rem !important;
+}
+.slide8-layout-fix .gamification-shot{
+  width:72% !important;
+  max-width:650px !important;
+  max-height:29vh !important;
+  height:auto !important;
+  object-fit:contain !important;
+  object-position:center top !important;
+  margin:0 auto !important;
+}
+.slide8-layout-fix .shot-caption{
+  width:72% !important;
+  margin:.35rem auto 0 !important;
+  font-size:.78rem !important;
+}
+.slide8-layout-fix .gamification-callout{
+  max-width:36% !important;
+  margin-top:.65rem !important;
+  padding:.75rem 1rem !important;
+}
+
+
+/* Slide 8 — sobe e centraliza visualmente os três benefícios */
+.slide8-layout-fix .gamification-benefits{
+  transform:translateY(-46px) !important;
+  margin-top:0 !important;
+}
+.slide8-layout-fix .gamification-benefits .card{
+  margin-bottom:12px !important;
+}
+
+
+/* Slide 8 — correção efetiva da coluna de texto */
+.slide8-layout-fix .gamification-copy{
+  transform:translateY(-105px) !important;
+  margin-top:0 !important;
+  align-self:start !important;
+}
+
+
+/* Slide 8 — posição final: duas linhas abaixo do subtítulo */
+.slide8-layout-fix .gamification-copy{
+  transform:translateY(-35px) !important;
+  margin-top:0 !important;
+  align-self:start !important;
+}
+
+
+/* Slide 8 — ajuste fino: blocos cerca de 1–2 linhas abaixo do subtítulo */
+.slide8-layout-fix .gamification-copy{
+  transform:translateY(-70px) !important;
+  margin-top:0 !important;
+  align-self:start !important;
+}
+
+
+/* Slide 8 — ajuste solicitado: desce Progressão, Reconhecimento e Continuidade */
+.slide8-layout-fix .gamification-copy{
+  transform:translateY(5px) !important;
+  margin-top:0 !important;
+  align-self:start !important;
+}
+
+
+
+/* Slide 7 — mesma composição visual do slide 8 */
+.slide:nth-of-type(7) .slide-content{
+  overflow:hidden !important;
+}
+.slide:nth-of-type(7) .content-grid,
+.slide:nth-of-type(7) .student-layout,
+.slide:nth-of-type(7) .journey-layout{
+  grid-template-columns:minmax(340px,.88fr) minmax(430px,1.12fr) !important;
+  gap:2.5rem !important;
+  align-items:start !important;
+}
+.slide:nth-of-type(7) .student-shot,
+.slide:nth-of-type(7) .product-shot,
+.slide:nth-of-type(7) img{
+  width:88% !important;
+  max-width:780px !important;
+  max-height:42vh !important;
+  height:auto !important;
+  object-fit:contain !important;
+  object-position:center top !important;
+  margin:.25rem auto 0 !important;
+  display:block !important;
+  border-radius:18px !important;
+  border:1px solid rgba(255,255,255,.22) !important;
+  box-shadow:0 14px 30px rgba(2,6,23,.32) !important;
+}
+.slide:nth-of-type(7) .student-shot-wrap,
+.slide:nth-of-type(7) .image-frame,
+.slide:nth-of-type(7) .student-shot-frame{
+  width:100% !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+
+
+/* Página 9 — reorganização visual sem alterar conteúdo */
+.method-slide{
+  padding-top:8.2vh !important;
+  padding-bottom:8vh !important;
+}
+.method-slide .kicker{
+  margin-bottom:.42rem !important;
+}
+.method-slide h2{
+  margin-bottom:.55rem !important;
+}
+.method-slide .lead{
+  margin-bottom:.75rem !important;
+  max-width:1180px !important;
+}
+.method-slide .method-flow{
+  margin:0 0 .9rem !important;
+  gap:.7rem !important;
+}
+.method-slide .method-grid{
+  gap:1.35rem !important;
+  align-items:stretch !important;
+}
+.method-slide .method-card{
+  padding:.82rem !important;
+  border-radius:20px !important;
+}
+.method-slide .method-card-head{
+  min-height:62px !important;
+  margin-bottom:.62rem !important;
+}
+.method-slide .method-shot-frame{
+  border-radius:16px !important;
+}
+.method-slide .method-shot{
+  height:29vh !important;
+}
+.method-slide .method-caption{
+  margin-top:.42rem !important;
+  line-height:1.25 !important;
+}
+.method-slide .method-callout{
+  margin-top:.85rem !important;
+  padding:.65rem .95rem !important;
+  border-radius:14px !important;
+  line-height:1.3 !important;
+}
+
+
+/* Novo slide — Mapeamento BNCC × Trilhas × Níveis LogicKids */
+.bncc-map-slide{
+  padding-top:7.4vh !important;
+  padding-bottom:7vh !important;
+}
+.bncc-map-slide .lead{
+  max-width:1160px;
+  margin-bottom:1.15rem;
+}
+.bncc-levels{
+  display:grid;
+  grid-template-columns:repeat(17,auto);
+  align-items:center;
+  justify-content:center;
+  gap:.38rem;
+  margin:1.15rem auto 1.45rem;
+  width:100%;
+}
+.bncc-level{
+  width:112px;
+  min-height:116px;
+  padding:.72rem .55rem .62rem;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:18px;
+  background:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.07));
+  box-shadow:0 12px 26px rgba(2,6,23,.20);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.bncc-level span{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:44px;
+  height:29px;
+  padding:0 .55rem;
+  margin-bottom:.42rem;
+  border-radius:999px;
+  background:#ffd21c;
+  color:#123a74;
+  font-weight:900;
+  font-size:.93rem;
+}
+.bncc-level b{
+  color:#fff;
+  font-size:.79rem;
+  line-height:1.12;
+  min-height:35px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.bncc-level small{
+  font-size:1.05rem;
+  margin-top:.28rem;
+}
+.bncc-arrow{
+  color:#ffd21c;
+  font-weight:900;
+  font-size:1.18rem;
+}
+.bncc-map-cards{
+  display:grid;
+  grid-template-columns:1fr auto 1fr auto 1fr;
+  align-items:center;
+  gap:.8rem;
+  max-width:1180px;
+  margin:0 auto 1rem;
+}
+.bncc-map-card{
+  min-height:96px;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:17px;
+  background:rgba(255,255,255,.09);
+  padding:.85rem 1rem;
+  display:flex;
+  gap:.8rem;
+  align-items:center;
+}
+.bncc-map-num{
+  flex:0 0 35px;
+  width:35px;height:35px;border-radius:50%;
+  background:#ffd21c;color:#123a74;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;
+}
+.bncc-map-card strong{
+  display:block;
+  color:#ffd21c;
+  font-size:.8rem;
+  letter-spacing:.055em;
+  margin-bottom:.25rem;
+}
+.bncc-map-card p{
+  margin:0;
+  color:#fff;
+  font-size:.83rem;
+  line-height:1.25;
+}
+.bncc-map-link{
+  color:#ffd21c;
+  font-size:1.25rem;
+  font-weight:900;
+}
+.bncc-school-callout{
+  max-width:1180px;
+  margin:.35rem auto 0;
+  padding:.72rem 1rem;
+  border-radius:14px;
+  border-left:5px solid #ffd21c;
+  background:rgba(5,57,107,.42);
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  font-size:.82rem;
+  line-height:1.28;
+}
+.bncc-school-callout b{
+  color:#ffd21c;
+  letter-spacing:.08em;
+  white-space:nowrap;
+}
+.bncc-school-callout span{
+  color:#fff;
+}
+@media (max-width:1100px){
+  .bncc-levels{ gap:.24rem; }
+  .bncc-level{ width:92px; padding:.6rem .35rem; }
+  .bncc-level b{ font-size:.69rem; }
+}
+
+
+/* Página 8 — redução suave, preservando integralmente bordas e acabamento */
+.slide:nth-of-type(8) img{
+  width:94% !important;
+  max-width:820px !important;
+  max-height:40vh !important;
+  height:auto !important;
+  object-fit:contain !important;
+}
+
+
+/* Página 8 — imagem um pouco maior e moldura exatamente alinhada */
+.slide:nth-of-type(8) img{
+  width:98% !important;
+  max-width:860px !important;
+  max-height:42vh !important;
+  height:auto !important;
+  object-fit:contain !important;
+  display:block !important;
+  margin:0 auto !important;
+  border-radius:18px !important;
+}
+
+/* Faz a borda acompanhar exatamente as dimensões da imagem */
+.slide:nth-of-type(8) .student-shot-wrap,
+.slide:nth-of-type(8) .image-frame,
+.slide:nth-of-type(8) .student-shot-frame,
+.slide:nth-of-type(8) .gamification-media{
+  width:fit-content !important;
+  max-width:100% !important;
+  height:auto !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  border-radius:18px !important;
+  background:transparent !important;
+}
+
+/* Caso a própria imagem seja o elemento com acabamento visual */
+.slide:nth-of-type(8) img{
+  border:1px solid rgba(255,255,255,.22) !important;
+  box-shadow:0 14px 30px rgba(2,6,23,.32) !important;
+}
+
+
+/* Página 8 — ajuste final: imagem maior + acabamento justo e arredondado */
+.slide:nth-of-type(8) img{
+  width:100% !important;
+  max-width:900px !important;
+  max-height:44vh !important;
+  height:auto !important;
+  display:block !important;
+  object-fit:contain !important;
+  margin:0 auto !important;
+  border-radius:20px !important;
+  border:1px solid rgba(255,255,255,.22) !important;
+  box-shadow:0 14px 30px rgba(2,6,23,.32) !important;
+}
+.slide:nth-of-type(8) .student-shot-wrap,
+.slide:nth-of-type(8) .image-frame,
+.slide:nth-of-type(8) .student-shot-frame,
+.slide:nth-of-type(8) .gamification-media{
+  width:fit-content !important;
+  max-width:100% !important;
+  height:fit-content !important;
+  padding:0 !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  border:0 !important;
+  border-radius:20px !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  overflow:hidden !important;
+}
+
+
+/* Página 8 — replica o acabamento visual usado na página 12 */
+.slide:nth-of-type(8) .gamification-media{
+  width:100% !important;
+  max-width:none !important;
+  height:auto !important;
+  margin:0 !important;
+  padding:0 !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  overflow:visible !important;
+}
+.slide:nth-of-type(8) .gamification-shot,
+.slide:nth-of-type(8) .student-shot,
+.slide:nth-of-type(8) .product-shot,
+.slide:nth-of-type(8) img{
+  width:100% !important;
+  max-width:none !important;
+  max-height:42vh !important;
+  height:auto !important;
+  display:block !important;
+  object-fit:contain !important;
+  margin:0 !important;
+  padding:0 !important;
+  border-radius:18px !important;
+  border:1px solid rgba(255,255,255,.18) !important;
+  box-shadow:0 14px 30px rgba(2,6,23,.28) !important;
+  overflow:hidden !important;
+}
+
+
+/* PÁGINA 8 — imagem no MESMO padrão estrutural da página 12 */
+.slide:nth-of-type(8) .product-shot-media{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  padding:0 !important;
+  margin:0 !important;
+  background:none !important;
+  background-color:transparent !important;
+  border:0 !important;
+  border-radius:20px !important;
+  overflow:hidden !important;
+  box-shadow:0 16px 38px rgba(2,8,23,.32) !important;
+  line-height:0 !important;
+}
+
+.slide:nth-of-type(8) .product-shot{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-width:none !important;
+  max-height:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  background:none !important;
+  background-color:transparent !important;
+  border:2px solid rgba(255,255,255,.30) !important;
+  border-radius:20px !important;
+  box-sizing:border-box !important;
+  clip-path:inset(0 round 20px) !important;
+  box-shadow:none !important;
+}
+
+/* Mantém a coluna da imagem ocupando corretamente o espaço disponível,
+   como no layout da página 12, sem criar moldura maior que o screenshot. */
+.slide:nth-of-type(8) .product-shot-wrap{
+  grid-template-columns:minmax(330px,.82fr) minmax(520px,1.18fr) !important;
+  gap:2.25rem !important;
+  align-items:center !important;
+}
+
+
+/* Página 8 — somente redução leve de tamanho; formatação preservada */
+.slide:nth-of-type(8) .product-shot-media{
+  width:94% !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+
+/* Página 8 — redução mínima adicional, sem alterar a formatação */
+.slide:nth-of-type(8) .product-shot-media{
+  width:91% !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+
+/* Página 8 — redução mínima adicional; formatação 100% preservada */
+.slide:nth-of-type(8) .product-shot-media{
+  width:88% !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+
+/* Página 8 — somente tamanho da imagem: width 70%; formatação preservada */
+.slide:nth-of-type(8) .product-shot-media{
+  width:70% !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+
+/* Página 8 — width 70% aplicado diretamente ao slide correto */
+.student-slide .product-shot-media{
+  width:70% !important;
+  max-width:70% !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+.student-slide .product-shot{
+  width:100% !important;
+}
+
+
+/* Página 8 — ajuste correto do tamanho via flex-basis */
+.student-slide .product-shot-copy{
+  flex:0 0 35% !important;
+}
+.student-slide .product-shot-media{
+  flex:0 0 65% !important;
+  width:auto !important;
+  max-width:none !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+.student-slide .product-shot{
+  width:100% !important;
+  height:auto !important;
+}
+
+
+/* Página 9 — screenshots maiores e acabamento equivalente ao padrão da página 8 */
+.slide:nth-of-type(9) .method-shot-frame{
+  width:100% !important;
+  height:auto !important;
+  padding:0 !important;
+  margin:0 !important;
+  overflow:hidden !important;
+  border-radius:20px !important;
+  border:0 !important;
+  background:transparent !important;
+  box-shadow:0 16px 38px rgba(2,8,23,.32) !important;
+  line-height:0 !important;
+}
+.slide:nth-of-type(9) .method-shot{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-width:none !important;
+  max-height:34vh !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:2px solid rgba(255,255,255,.30) !important;
+  border-radius:20px !important;
+  box-sizing:border-box !important;
+  clip-path:inset(0 round 20px) !important;
+  box-shadow:none !important;
+}
+
+
+/* Página 9 — aplicação nas classes reais do screenshot */
+.slide:nth-of-type(9) .gamification-media{
+  width:100% !important;
+  max-width:none !important;
+  height:auto !important;
+  padding:0 !important;
+  margin:0 !important;
+  overflow:hidden !important;
+  border-radius:20px !important;
+  border:0 !important;
+  background:transparent !important;
+  box-shadow:0 16px 38px rgba(2,8,23,.32) !important;
+  line-height:0 !important;
+}
+.slide:nth-of-type(9) .gamification-shot{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-width:none !important;
+  max-height:43vh !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:2px solid rgba(255,255,255,.30) !important;
+  border-radius:20px !important;
+  box-sizing:border-box !important;
+  clip-path:inset(0 round 20px) !important;
+  box-shadow:none !important;
+}
+
+
+/* Página 9 — mesmo acabamento visual da imagem da página 8 */
+.slide:nth-of-type(9) .gamification-media{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  padding:0 !important;
+  margin:0 !important;
+  background:none !important;
+  background-color:transparent !important;
+  border:0 !important;
+  border-radius:20px !important;
+  overflow:hidden !important;
+  box-shadow:0 16px 38px rgba(2,8,23,.32) !important;
+  line-height:0 !important;
+}
+.slide:nth-of-type(9) .gamification-shot{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-width:none !important;
+  max-height:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  background:none !important;
+  background-color:transparent !important;
+  border:2px solid rgba(255,255,255,.30) !important;
+  border-radius:20px !important;
+  box-sizing:border-box !important;
+  clip-path:inset(0 round 20px) !important;
+  box-shadow:none !important;
+}
+
+
+/* Página 9 — libera espaço vertical para a legenda sem mudar o acabamento */
+.slide:nth-of-type(9) .gamification-media{
+  width:94% !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+.slide:nth-of-type(9) .shot-caption{
+  display:block !important;
+  position:relative !important;
+  margin-top:.45rem !important;
+  padding-bottom:.35rem !important;
+  line-height:1.25 !important;
+  overflow:visible !important;
+}
+
+
+/* Página 8 — libera espaço para a legenda abaixo da imagem */
+.slide:nth-of-type(8) .product-shot-media{
+  flex:0 0 62% !important;
+}
+.slide:nth-of-type(8) .product-shot{
+  width:100% !important;
+  height:auto !important;
+}
+.slide:nth-of-type(8) .shot-caption{
+  display:block !important;
+  position:relative !important;
+  margin-top:.35rem !important;
+  padding-bottom:.25rem !important;
+  line-height:1.2 !important;
+  overflow:visible !important;
+  z-index:2 !important;
+}
+
+
+/* Página 10 — legibilidade para coordenadores, professores e diretores */
+.slide:nth-of-type(10) .method-card{
+  padding:1.35rem 1.45rem 1.15rem !important;
+}
+.slide:nth-of-type(10) .method-card h3{
+  font-size:1.38rem !important;
+  line-height:1.12 !important;
+  letter-spacing:.01em !important;
+}
+.slide:nth-of-type(10) .method-card > p,
+.slide:nth-of-type(10) .method-card .method-desc{
+  font-size:1.03rem !important;
+  line-height:1.35 !important;
+}
+.slide:nth-of-type(10) .method-card .step-number{
+  width:2.55rem !important;
+  height:2.55rem !important;
+  min-width:2.55rem !important;
+  font-size:1.15rem !important;
+}
+.slide:nth-of-type(10) .method-shot,
+.slide:nth-of-type(10) .method-card img{
+  max-height:31vh !important;
+  object-fit:cover !important;
+  object-position:top center !important;
+}
+.slide:nth-of-type(10) .method-caption,
+.slide:nth-of-type(10) figcaption{
+  font-size:.96rem !important;
+  line-height:1.3 !important;
+  margin-top:.55rem !important;
+}
+.slide:nth-of-type(10) .school-callout{
+  font-size:1rem !important;
+  line-height:1.3 !important;
+}
+
+
+/* Página 10 — aumenta o bloco "PARA A ESCOLA" e sua legibilidade */
+.slide:nth-of-type(10) .school-callout{
+  font-size:1.16rem !important;
+  line-height:1.38 !important;
+  padding:1rem 1.35rem !important;
+  min-height:3.8rem !important;
+}
+.slide:nth-of-type(10) .school-callout strong:first-child{
+  font-size:1.08rem !important;
+  letter-spacing:.12em !important;
+}
+
+
+/* Página 10 — tipografia mais uniforme e legível */
+.slide:nth-of-type(10) .method-card h3{
+  font-size:1.48rem !important;
+  line-height:1.12 !important;
+}
+.slide:nth-of-type(10) .method-card > p,
+.slide:nth-of-type(10) .method-card .method-desc{
+  font-size:1.12rem !important;
+  line-height:1.34 !important;
+}
+.slide:nth-of-type(10) .method-caption,
+.slide:nth-of-type(10) figcaption{
+  font-size:1.08rem !important;
+  line-height:1.32 !important;
+}
+.slide:nth-of-type(10) .school-callout{
+  font-size:1.10rem !important;
+  line-height:1.34 !important;
+}
+.slide:nth-of-type(10) .school-callout strong:first-child{
+  font-size:1.10rem !important;
+}
+
+
+/* Página 10 — "PARA A ESCOLA" no mesmo padrão visual da página 11 */
+.slide:nth-of-type(10) .method-callout{
+  display:grid !important;
+  grid-template-columns:auto 1fr !important;
+  align-items:center !important;
+  column-gap:1.15rem !important;
+  width:100% !important;
+  padding:.9rem 1.25rem !important;
+  border-left:6px solid #ffd21c !important;
+  border-radius:18px !important;
+  box-sizing:border-box !important;
+  font-size:1.08rem !important;
+  line-height:1.32 !important;
+}
+.slide:nth-of-type(10) .method-callout > span{
+  display:block !important;
+  color:#ffd21c !important;
+  font-size:.98rem !important;
+  font-weight:800 !important;
+  letter-spacing:.14em !important;
+  white-space:nowrap !important;
+}
+.slide:nth-of-type(10) .method-callout > b{
+  font-weight:800 !important;
+}
+
+
+/* Página 10 — bloco PARA A ESCOLA reorganizado e padronizado */
+.slide:nth-of-type(10) .method-callout{
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:1.15rem !important;
+  width:100% !important;
+  min-height:0 !important;
+  padding:.82rem 1.25rem !important;
+  margin-top:.85rem !important;
+  box-sizing:border-box !important;
+  border-left:6px solid #ffd21c !important;
+  border-radius:18px !important;
+  font-size:1rem !important;
+  line-height:1.3 !important;
+  text-align:left !important;
+}
+.slide:nth-of-type(10) .method-callout > span{
+  flex:0 0 auto !important;
+  display:inline-block !important;
+  margin:0 !important;
+  color:#ffd21c !important;
+  font-size:.94rem !important;
+  font-weight:800 !important;
+  letter-spacing:.14em !important;
+  white-space:nowrap !important;
+}
+.slide:nth-of-type(10) .method-callout > b,
+.slide:nth-of-type(10) .method-callout > strong{
+  display:inline !important;
+  margin:0 !important;
+  font-size:1rem !important;
+  line-height:1.3 !important;
+  font-weight:800 !important;
+}
+
+
+/* Página 10 — texto pedagógico sem negrito */
+.slide:nth-of-type(10) .method-callout > b,
+.slide:nth-of-type(10) .method-callout > strong{
+  font-weight:400 !important;
+}
+
+
+/* Página 10 — subtítulos dos dois cards maiores */
+.slide:nth-of-type(10) .method-card > p,
+.slide:nth-of-type(10) .method-card .method-desc{
+  font-size:1.24rem !important;
+  line-height:1.32 !important;
+}
+
+
+/* Página 10 — subtítulos com o mesmo tamanho das legendas abaixo das imagens */
+.slide:nth-of-type(10) .method-card > p,
+.slide:nth-of-type(10) .method-card .method-desc{
+  font-size:1.08rem !important;
+  line-height:1.32 !important;
+}
+
+
+/* Página 14 — alinhamento curricular mais institucional e enxuto */
+.slide:nth-of-type(14) .criteria-grid{
+  gap:3.1rem !important;
+  align-items:start !important;
+}
+.slide:nth-of-type(14) .criteria-grid h3{
+  font-size:1.18rem !important;
+  margin-bottom:1.15rem !important;
+}
+.slide:nth-of-type(14) .criteria-grid li{
+  font-size:1.06rem !important;
+  line-height:1.42 !important;
+  margin-bottom:1.05rem !important;
+}
+.slide:nth-of-type(14) .criteria-grid li strong{
+  display:block !important;
+  font-size:.92rem !important;
+  letter-spacing:.055em !important;
+  margin-bottom:.18rem !important;
+}
+.slide:nth-of-type(14) .criteria-note{
+  font-size:.94rem !important;
+  line-height:1.35 !important;
+}
+
+
+/* Página 2 — composição mais equilibrada, sem poluir */
+.slide:nth-of-type(2) .content{
+  max-width:1400px !important;
+}
+.slide:nth-of-type(2) h1{
+  font-size:3.05rem !important;
+  line-height:1.08 !important;
+  margin-bottom:1.25rem !important;
+}
+.slide:nth-of-type(2) .lead{
+  font-size:1.42rem !important;
+  line-height:1.45 !important;
+  max-width:1050px !important;
+  margin-bottom:2rem !important;
+}
+.slide:nth-of-type(2) .challenge-grid{
+  margin-top:1.15rem !important;
+  transform:scale(1.08) !important;
+  transform-origin:top left !important;
+  width:92.6% !important;
+}
+.slide:nth-of-type(2) .challenge-flow{
+  margin-top:1.35rem !important;
+  font-size:1.08rem !important;
+}
+.slide:nth-of-type(2) .challenge-note{
+  margin-top:1.35rem !important;
+  font-size:1rem !important;
+  line-height:1.35 !important;
+}
+
+
+/* Página 2 — layout expandido para ocupar melhor a tela */
+.slide:nth-of-type(2) .content{
+  max-width:1420px !important;
+}
+.slide:nth-of-type(2) h1{
+  margin-bottom:1rem !important;
+}
+.slide:nth-of-type(2) .lead{
+  margin-bottom:1.55rem !important;
+}
+.slide:nth-of-type(2) .challenge-grid{
+  transform:none !important;
+  width:100% !important;
+  display:grid !important;
+  grid-template-columns:minmax(380px,.78fr) 70px minmax(620px,1.22fr) !important;
+  gap:1.7rem !important;
+  align-items:stretch !important;
+  margin-top:1rem !important;
+}
+.slide:nth-of-type(2) .challenge-grid > *{
+  min-height:100% !important;
+}
+.slide:nth-of-type(2) .challenge-create{
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:.85rem !important;
+  align-content:start !important;
+}
+.slide:nth-of-type(2) .challenge-create > h3{
+  grid-column:1 / -1 !important;
+  margin:0 0 .25rem !important;
+}
+.slide:nth-of-type(2) .challenge-create > div{
+  padding:1rem 1.05rem !important;
+  border:1px solid rgba(255,255,255,.15) !important;
+  border-radius:16px !important;
+  background:rgba(255,255,255,.055) !important;
+  min-height:5rem !important;
+  display:flex !important;
+  align-items:center !important;
+}
+.slide:nth-of-type(2) .challenge-flow{
+  margin-top:1.45rem !important;
+  padding:.9rem 1.15rem !important;
+  border-radius:16px !important;
+  background:rgba(255,255,255,.055) !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  text-align:center !important;
+}
+.slide:nth-of-type(2) .challenge-note{
+  margin-top:1.1rem !important;
+  padding-top:1rem !important;
+}
+
+
+/* --- Extracted from index.html --- */
+
+/* Página 2 — reorganização estrutural real */
+.slide:nth-of-type(2){
+  padding-top:3.5rem !important;
+}
+.slide:nth-of-type(2) h2{
+  font-size:3.15rem !important;
+  line-height:1.08 !important;
+  margin-bottom:1rem !important;
+}
+.slide:nth-of-type(2) > .lead{
+  font-size:1.42rem !important;
+  line-height:1.42 !important;
+  max-width:1100px !important;
+  margin-bottom:1.3rem !important;
+}
+.slide:nth-of-type(2) .challenge-main-grid{
+  display:grid !important;
+  grid-template-columns:minmax(350px,.72fr) 76px minmax(650px,1.28fr) !important;
+  gap:1.5rem !important;
+  align-items:stretch !important;
+  margin-top:1.3rem !important;
+}
+.slide:nth-of-type(2) .consume-box{
+  padding:1.45rem 1.5rem !important;
+  border:1px solid rgba(255,255,255,.16) !important;
+  border-radius:20px !important;
+  background:rgba(255,255,255,.055) !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+  min-height:270px !important;
+}
+.slide:nth-of-type(2) .challenge-arrow{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  color:#f3c74f !important;
+  font-size:3rem !important;
+  font-weight:800 !important;
+}
+.slide:nth-of-type(2) .create-area{
+  display:flex !important;
+  flex-direction:column !important;
+}
+.slide:nth-of-type(2) .create-cards{
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:.85rem !important;
+}
+.slide:nth-of-type(2) .create-card{
+  display:grid !important;
+  grid-template-columns:42px 1fr !important;
+  gap:.75rem !important;
+  align-items:center !important;
+  min-height:105px !important;
+  padding:1rem 1.05rem !important;
+  border:1px solid rgba(255,255,255,.15) !important;
+  border-radius:17px !important;
+  background:rgba(255,255,255,.055) !important;
+}
+.slide:nth-of-type(2) .create-card strong{
+  font-size:1.08rem !important;
+}
+.slide:nth-of-type(2) .create-card span{
+  font-size:.98rem !important;
+  line-height:1.35 !important;
+}
+.slide:nth-of-type(2) > div[style*="justify-content:center"]{
+  margin-top:1.35rem !important;
+  padding:.85rem 1rem !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  border-radius:16px !important;
+  background:rgba(255,255,255,.045) !important;
+}
+.slide:nth-of-type(2) .notes{
+  margin-top:1.15rem !important;
+  font-size:1rem !important;
+}
+
+/* --- Extracted from index.html --- */
+
+/* Página 14 — ajuste final: referências + mensagem institucional */
+.slide:nth-of-type(14) .school-alignment-note{
+  margin-top:1.15rem !important;
+  padding:.9rem 1.15rem !important;
+  border-left:5px solid #ffd21c !important;
+  border-radius:14px !important;
+  background:rgba(255,255,255,.045) !important;
+  font-size:.98rem !important;
+  line-height:1.35 !important;
+  font-style:normal !important;
+}
+.slide:nth-of-type(14) .school-alignment-note strong{
+  color:#ffd21c !important;
+  font-size:.9rem !important;
+  letter-spacing:.12em !important;
+  margin-right:.65rem !important;
+}
